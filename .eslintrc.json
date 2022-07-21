@@ -1,3 +1,55 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "airbnb-typescript",
+        "plugin:@next/next/recommended",
+        "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "prettier/prettier": [
+            "error"
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+        "import/prefer-default-export": "off",
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": ["function-declaration", "arrow-function"],
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "react/prop-types": "off",
+        "react/jsx-props-no-spreading": "off",
+        "no-restricted-exports": "off"
+    }
 }
