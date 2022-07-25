@@ -1,38 +1,37 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+// import { NextPage } from 'next';
+// import { useEffect, useState } from 'react';
+import { useLaunchListQuery } from '../graphql/generated/schema';
 
-export { default } from '../src/pages/Home';
+// export async function getServerSideProps() {
+//   return {
+//     props: {
+//       data: data?.launchesPast,
+//     },
+//   };
+// }
 
-export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: 'https://api.spacex.land/graphql/',
-    cache: new InMemoryCache(),
-  });
-  const { data } = await client.query({
-    query: gql`
-      query GetLaunches {
-        launchesPast(limit: 10) {
-          id
-          mission_name
-          launch_date_local
-          launch_site {
-            site_name_long
-          }
-          links {
-            article_link
-            video_link
-            mission_patch
-          }
-          rocket {
-            rocket_name
-          }
-        }
-      }
-    `,
-  });
+// const Home: NextPage = () => {
+//   const { data } = useLaunchListQuery();
+//
+//   useEffect(() => {
+//     console.log(data);
+//   }, [data]);
+//
+//   return (
+//     <section>
+//       <div>Test</div>
+//     </section>
+//   );
+// };
+//
+// export default Home;
 
-  return {
-    props: {
-      launches: data.launchesPast,
-    },
-  };
+export default function IndexPage() {
+  const { data, loading, error } = useLaunchListQuery();
+
+  console.log({ data, loading, error });
+
+  if (loading) return 'Loading...';
+
+  return <div>Completed: {data?.launchesPast?.length}</div>;
 }
