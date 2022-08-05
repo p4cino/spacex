@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {
   addApolloState,
   initializeApollo,
@@ -7,13 +8,22 @@ import {
   useLaunchListQuery,
 } from '../graphql/generated/schema';
 
+export const Title = styled.h1`
+  font-size: 1.5rem;
+`;
+
 export default function IndexPage() {
   const { data, loading, error } = useLaunchListQuery();
   console.log({ data, loading, error });
 
   if (loading) return 'Loading...';
 
-  return <div>Completed: {data?.launchesPast?.length}</div>;
+  return (
+    <>
+      <Title>Hello Next.js</Title>
+      Completed: {data?.launchesPast?.length}
+    </>
+  );
 }
 
 // export async function getServerSideProps() {
